@@ -1,7 +1,7 @@
 {
   "python.pythonPath": "D:\\Programas\\Miniconda3\\envs\\django2\\python.exe",
   "python.autoComplete.extraPaths": [
-    "${env:SPARK_HOME}\\python",
-    "${env:SPARK_HOME}\\python\\pyspark"
+    "${env:SPARK_HOME}\\python\\pyspark",
+    "${env:SPARK_HOME}\\python"
   ]
 }

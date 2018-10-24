@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+
+{% block contenido %}
+<form method="POST">
+    <div class="panel-heading">
+        Editar/Crear Sub Categoria
+    </div>
+    <div class="panel-body">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-danger"><span class="fa fa-save"> Guardar</span></button>
+        <a href="{% url 'catalogos:subcategoria_list' %}" class="btn btn-success"> Cancelar</a>
+    </div>
+</form>
+{% endblock contenido %}

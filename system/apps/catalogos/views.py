@@ -5,8 +5,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from apps.catalogos.forms import CategoriaForm
-from apps.catalogos.models import Categoria
+from apps.catalogos.forms import CategoriaForm, SubCategoriaForm
+from apps.catalogos.models import Categoria, SubCategoria
 from apps.generales.views import SinPrivilegios
 
 
@@ -43,3 +43,39 @@ class CategoriaDel(LoginRequiredMixin, SinPrivilegios, generic.DeleteView):
     template_name = "catalogos/catalogos_del.html"
     context_object_name = 'obj'
     success_url = reverse_lazy("catalogos:categoria_list")
+
+
+class SubCategoriaView(LoginRequiredMixin, generic.ListView):
+    model = SubCategoria
+    template_name = "catalogos/subcategoria_list.html"
+    context_object_name = "obj"
+    login_url = 'generales:login'
+
+
+class SubCategoriaNew(SuccessMessageMixin, LoginRequiredMixin, SinPrivilegios,
+                   generic.CreateView):
+    permission_required = "catalogos.add_subcategoria"
+    model = SubCategoria
+    template_name = "catalogos/subcategoria_form.html"
+    context_object_name = 'obj'
+    form_class = SubCategoriaForm
+    success_url = reverse_lazy("catalogos:subcategoria_list")
+    success_message = "Sub Categoría Creada Satisfactoriamente"
+
+
+class SubCategoriaEdit(SuccessMessageMixin, LoginRequiredMixin, SinPrivilegios, generic.UpdateView):
+    permission_required = "catalogos.change_subcategoria"
+    model = SubCategoria
+    template_name = "catalogos/subcategoria_form.html"
+    context_object_name = 'obj'
+    form_class = SubCategoriaForm
+    success_url = reverse_lazy("catalogos:subcategoria_list")
+    success_message = "Sub Categoría Actualizada Satisfactoriamente"
+
+
+class SubCategoriaDel(LoginRequiredMixin, SinPrivilegios, generic.DeleteView):
+    permission_required = "catalogos.delete_subcategoria"
+    model = SubCategoria
+    template_name = "catalogos/catalogos_del.html"
+    context_object_name = 'obj'
+    success_url = reverse_lazy("catalogos:subcategoria_list")

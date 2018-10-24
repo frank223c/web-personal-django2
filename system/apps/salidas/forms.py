@@ -30,9 +30,7 @@ class FacturaDetForm(forms.ModelForm):
 
     class Meta:
         model = FacturaDet
-        fields = ['producto', 'cantidad',
-                  'precio', 'total'
-                  ]
+        fields = ['producto', 'cantidad', 'precio', 'total']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

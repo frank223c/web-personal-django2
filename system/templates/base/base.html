@@ -247,7 +247,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw"></i> {{ user.username }} <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -383,8 +383,31 @@
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
+                {% if form.errors %}
+                {% for field in form %}
+                {% if field.errors %}
+                {% for error in field.errors %}
+                {{ error|escape }}
+                {% endfor %}
+                {% endif %}
+                {% endfor %}
+                {% if form.non_field_errors%}
+                {% for error in form.non_field_errors %}
+                {{ error|escape }}
+                {% endfor %}
+                {% endif %}
+                {% endif %}
                 <div class="row">
                     <div class="col-lg-12">
+                        <h1 class="page-header">
+                            <small class="text-danger text-center">
+                                {% if messages %}
+                                {% for message in messages %}
+                                {{ message|safe }}<br>
+                                {% endfor %}
+                                {% endif %}
+                            </small>
+                        </h1>
                         {% block contenido %}Blank{% endblock contenido %}
                     </div>
                     <!-- /.col-lg-12 -->

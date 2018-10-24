@@ -5,8 +5,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from apps.catalogos.forms import CategoriaForm, SubCategoriaForm
-from apps.catalogos.models import Categoria, SubCategoria
+from apps.catalogos.forms import CategoriaForm, ProductoForm, SubCategoriaForm
+from apps.catalogos.models import Categoria, Producto, SubCategoria
 from apps.generales.views import SinPrivilegios
 
 
@@ -53,7 +53,7 @@ class SubCategoriaView(LoginRequiredMixin, generic.ListView):
 
 
 class SubCategoriaNew(SuccessMessageMixin, LoginRequiredMixin, SinPrivilegios,
-                   generic.CreateView):
+                      generic.CreateView):
     permission_required = "catalogos.add_subcategoria"
     model = SubCategoria
     template_name = "catalogos/subcategoria_form.html"
@@ -79,3 +79,39 @@ class SubCategoriaDel(LoginRequiredMixin, SinPrivilegios, generic.DeleteView):
     template_name = "catalogos/catalogos_del.html"
     context_object_name = 'obj'
     success_url = reverse_lazy("catalogos:subcategoria_list")
+
+
+class ProductoView(LoginRequiredMixin, generic.ListView):
+    model = Producto
+    template_name = "catalogos/producto_list.html"
+    context_object_name = "obj"
+    login_url = 'generales:login'
+
+
+class ProductoNew(SuccessMessageMixin, LoginRequiredMixin, SinPrivilegios,
+                  generic.CreateView):
+    permission_required = "catalogos.add_producto"
+    model = Producto
+    template_name = "catalogos/producto_form.html"
+    context_object_name = 'obj'
+    form_class = ProductoForm
+    success_url = reverse_lazy("catalogos:producto_list")
+    success_message = "Producto Creado Satisfactoriamente"
+
+
+class ProductoEdit(SuccessMessageMixin, LoginRequiredMixin, SinPrivilegios, generic.UpdateView):
+    permission_required = "catalogos.change_producto"
+    model = Producto
+    template_name = "catalogos/producto_form.html"
+    context_object_name = 'obj'
+    form_class = ProductoForm
+    success_url = reverse_lazy("catalogos:producto_list")
+    success_message = "Producto Modificado Satisfactoriamente"
+
+
+class ProductoDel(LoginRequiredMixin, SinPrivilegios, generic.DeleteView):
+    permission_required = "catalogos.delete_producto"
+    model = Producto
+    template_name = "catalogos/productos_del.html"
+    context_object_name = 'obj'
+    success_url = reverse_lazy("catalogos:producto_list")

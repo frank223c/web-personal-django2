@@ -1,8 +1,9 @@
 from os.path import dirname
 
-from apps.catalogos.models import Categoria, SubCategoria
 # from astroid import objects
 from django import forms
+
+from apps.catalogos.models import Categoria, Producto, SubCategoria
 
 
 class CategoriaForm(forms.ModelForm):
@@ -50,3 +51,26 @@ class SubCategoriaForm(forms.ModelForm):
                 'class': 'form-control'
             })
         self.fields['categoria'].empty_label = "Seleccione Categoria"
+
+
+class ProductoForm(forms.ModelForm):
+    """Form definition for Categoria."""
+
+    subcategoria = forms.ModelChoiceField(
+        queryset=SubCategoria.objects.filter(
+            activo=True).order_by('categoria__descripcion', 'descripcion'),
+        empty_label="Selecciones Sub Categoria"
+    )
+
+    class Meta:
+        """Meta definition for Categoriaform."""
+
+        model = Producto
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control'
+            })

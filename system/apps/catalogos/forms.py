@@ -9,14 +9,14 @@ class CategoriaForm(forms.ModelForm):
         """Meta definition for Categoriaform."""
 
         model = Categoria
-        fields = ['descripcion']
-        labels = {'descripcion' : "Descripción de la categoria"}
-        widget = {'descripcion' : forms.TextInput()}
-    
+        fields = ['descripcion', 'activo']
+        labels = {'descripcion': "Descripción de la categoria",
+                  'activo': "Estado"}
+        widget = {'descripcion': forms.TextInput()}
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
                 'class': 'form-control'
             })
-    

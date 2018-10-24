@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 from os.path import join
 
+from django.conf.global_settings import LOGIN_REDIRECT_URL, \
+    LOGOUT_REDIRECT_URL
+
+
 # from django.conf.global_settings import STATICFILES_DIRS
 
 
@@ -125,3 +129,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'

@@ -1,0 +1,19 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Abrir en Firefox",
+            "command": "explorer",
+            "windows": {
+                "command": "D:\\Programas\\Mozilla Firefox\\firefox.exe"
+            },
+            "args": [
+                "${file}"
+            ],
+            "presentation": {
+                "reveal": "never"
+            },
+            "problemMatcher": []
+        }
+    ]
+}

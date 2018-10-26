@@ -18,7 +18,7 @@ class FacturaList(LoginRequiredMixin, generic.ListView):
     context_object_name = "facturas"
 
 
-class FacturaNew(SinPrivilegios, generic.CreateView):
+class FacturaNew(LoginRequiredMixin, SinPrivilegios, generic.CreateView):
     permission_required = 'salidas.add_facturaenc'
     model = FacturaEnc
     login_url = 'generales:home'
